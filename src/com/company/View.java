@@ -16,18 +16,16 @@ public class View {
     ArrayList<Human> dataInput() {
         ArrayList<Human> humanList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        boolean isNewRecordCreated = true;
         String input;
         String[] inputSplit;
-        System.out.println("Введите данные для добавления новой записи \n" +
-                "Нажмите клавишу 'Enter' для вывода записей из базы данных \n" +
-                "(Имя Фамилия Возраст Пол)");
+        System.out.println("Нажмите клавишу 'Enter' для вывода записей из базы данных");
 
         while (true) {
+            System.out.println("Введите данные для добавления новой записи \n" +
+                    "(Имя Фамилия Возраст Пол)");
             input = scanner.nextLine().trim();
             inputSplit = input.split("\\s+");
             if (input.isEmpty()) {
-                isNewRecordCreated = false;
                 break;
             } else if (inputSplit.length < 4) {
                 System.out.println("Введены не все значения!");
@@ -37,16 +35,12 @@ public class View {
                 System.out.println("Неверно введено значение параметра пол!" +
                         "\nПараметр пол может принимать только значения F или M");
             } else {
-                break;
+                humanList.add(new Human(
+                        inputSplit[0],
+                        inputSplit[1],
+                        Integer.parseInt(inputSplit[2]),
+                        inputSplit[3].charAt(0)));
             }
-        }
-
-        if (isNewRecordCreated) {
-            humanList.add(new Human(
-                    inputSplit[0],
-                    inputSplit[1],
-                    Integer.parseInt(inputSplit[2]),
-                    inputSplit[3].charAt(0)));
         }
         return humanList;
     }
